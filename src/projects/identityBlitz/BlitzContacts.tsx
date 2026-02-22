@@ -1,15 +1,8 @@
 // src/projects/identityBlitz/BlitzContacts.tsx
-import { YMaps, Map, Placemark } from '@pbe/react-yandex-maps';
-import BlitzNav from '../../components/BlitzNav';     // adjust path
-import BlitzFooter from '../../components/BlitzFooter'; // adjust path
+import BlitzNav from '../../components/BlitzNav';
+import BlitzFooter from '../../components/BlitzFooter';
 
 export default function BlitzContacts() {
-  const mapDefaultState = {
-    center: [55.7305, 37.6200], // Approx Pyatnitskaya st., 73, Moscow
-    zoom: 15,
-    controls: ['zoomControl', 'fullscreenControl'], // minimal controls
-  };
-
   return (
     <>
       <BlitzNav />
@@ -27,27 +20,18 @@ export default function BlitzContacts() {
         {/* Main Content: Map + Info */}
         <section className="py-12 md:py-16">
           <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-10 lg:gap-16 items-start">
-            {/* Left: Map */}
+            {/* Left: Google Map Embed (No API Key Needed) */}
             <div className="h-[500px] md:h-[600px] rounded-xl overflow-hidden shadow-xl">
-              <YMaps
-                query={{
-                  apikey: 'YOUR_YANDEX_MAPS_API_KEY', // ← Get free key below!
-                  lang: 'en_US', // or 'ru_RU' for Russian
-                }}
-              >
-                <Map defaultState={mapDefaultState} className="w-full h-full">
-                  <Placemark
-                    geometry={[55.7305, 37.6200]} // Exact coords for Pyatnitskaya 73
-                    options={{
-                      preset: 'islands#blueDotIconWithCaption',
-                    }}
-                    properties={{
-                      iconCaption: 'Identity Blitz',
-                      hintContent: 'Pyatnitskaya st., 73, Moscow',
-                    }}
-                  />
-                </Map>
-              </YMaps>
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2245.837348947454!2d37.618!3d55.7305!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTXCsDQzJzQ5LjgiTiAzN8KwMzcnMDQuOCJF!5e0!3m2!1sen!2sru!4v1234567890"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Identity Blitz Office - Pyatnitskaya st., 73, Moscow"
+              />
             </div>
 
             {/* Right: Contact Info + Feedback */}
@@ -75,16 +59,56 @@ export default function BlitzContacts() {
                 </address>
               </div>
 
-              {/* Feedback / Contact Form Placeholder */}
+              {/* Feedback / Contact Form */}
               <div className="bg-white p-6 rounded-xl shadow-md">
                 <h3 className="text-xl font-bold mb-4">Feedback</h3>
                 <p className="text-gray-600 mb-4">
                   Send us your questions or suggestions — we'll get back to you shortly.
                 </p>
-                {/* Insert your contact form here later (e.g. Formik, React Hook Form, or simple HTML form) */}
-                <div className="text-sm text-gray-500 italic">
-                  [Contact form placeholder — id="contact-form-1"]
-                </div>
+                <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                      Name
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      placeholder="Your name"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      placeholder="your@email.com"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                      Message
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      rows={4}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      placeholder="Your message..."
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors"
+                  >
+                    Send Message
+                  </button>
+                </form>
               </div>
             </div>
           </div>
