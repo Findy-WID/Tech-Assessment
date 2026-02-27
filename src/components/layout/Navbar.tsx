@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Navbar() {
@@ -6,6 +6,8 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [mobileDropdown, setMobileDropdown] = useState<string | null>(null);
+  
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,9 +17,20 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleMouseEnter = (menu: string) => setOpenDropdown(menu);
-  const handleMouseLeave = () => setOpenDropdown(null);
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setOpenDropdown(null);
+      }
+    };
 
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const handleMouseEnter = (menu: string) => setOpenDropdown(menu);
+  
   const toggleMobileDropdown = (menu: string) => {
     setMobileDropdown(mobileDropdown === menu ? null : menu);
   };
@@ -25,10 +38,9 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-white shadow-md'
-          : 'bg-premium-dark'
+        isScrolled ? 'bg-white shadow-md' : 'bg-premium-dark'
       }`}
+      ref={dropdownRef}
     >
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
@@ -44,12 +56,8 @@ export default function Navbar() {
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-8">
 
-          {/* Products Dropdown */}
-          <div 
-            className="relative" 
-            onMouseEnter={() => handleMouseEnter('products')} 
-            onMouseLeave={handleMouseLeave}
-          >
+          {/* Products Dropdown - STAYS OPEN */}
+          <div className="relative" onMouseEnter={() => handleMouseEnter('products')}>
             <button 
               className={`flex items-center gap-1 font-medium transition-colors ${
                 isScrolled ? 'text-gray-700 hover:text-premium-accent' : 'text-white hover:text-premium-accent'
@@ -64,6 +72,7 @@ export default function Navbar() {
                     <Link 
                       to="/products/provider" 
                       className="block text-gray-700 hover:text-premium-accent font-medium transition-colors"
+                      onClick={() => setOpenDropdown(null)}
                     >
                       PremiumID Provider
                     </Link>
@@ -71,8 +80,9 @@ export default function Navbar() {
                   </li>
                   <li className="pt-3 border-t border-gray-200">
                     <Link 
-                      to="/products/smart-card" 
+                      to="/products/smartcard" 
                       className="block text-gray-700 hover:text-premium-accent font-medium transition-colors"
+                      onClick={() => setOpenDropdown(null)}
                     >
                       PremiumID Smart Card Plugin
                     </Link>
@@ -83,12 +93,8 @@ export default function Navbar() {
             )}
           </div>
 
-          {/* Solutions Dropdown */}
-          <div 
-            className="relative" 
-            onMouseEnter={() => handleMouseEnter('solutions')} 
-            onMouseLeave={handleMouseLeave}
-          >
+          {/* Solutions Dropdown - STAYS OPEN */}
+          <div className="relative" onMouseEnter={() => handleMouseEnter('solutions')}>
             <button 
               className={`flex items-center gap-1 font-medium transition-colors ${
                 isScrolled ? 'text-gray-700 hover:text-premium-accent' : 'text-white hover:text-premium-accent'
@@ -101,90 +107,40 @@ export default function Navbar() {
                 <h4 className="font-bold text-gray-900 mb-4">By Industry</h4>
                 <ul className="grid grid-cols-2 gap-x-6 gap-y-3 text-sm">
                   <li>
-                    <Link to="/solutions/financial-services" className="text-gray-700 hover:text-premium-accent transition-colors">
+                    <Link to="/solutions/industry/financial-services" className="text-gray-700 hover:text-premium-accent transition-colors" onClick={() => setOpenDropdown(null)}>
                       Financial Services
                     </Link>
                   </li>
                   <li>
-                    <Link to="/solutions/healthcare" className="text-gray-700 hover:text-premium-accent transition-colors">
+                    <Link to="/solutions/industry/healthcare" className="text-gray-700 hover:text-premium-accent transition-colors" onClick={() => setOpenDropdown(null)}>
                       Healthcare
                     </Link>
                   </li>
                   <li>
-                    <Link to="/solutions/manufacturing" className="text-gray-700 hover:text-premium-accent transition-colors">
+                    <Link to="/solutions/industry/manufacturing" className="text-gray-700 hover:text-premium-accent transition-colors" onClick={() => setOpenDropdown(null)}>
                       Manufacturing
                     </Link>
                   </li>
                   <li>
-                    <Link to="/solutions/government" className="text-gray-700 hover:text-premium-accent transition-colors">
+                    <Link to="/solutions/industry/government" className="text-gray-700 hover:text-premium-accent transition-colors" onClick={() => setOpenDropdown(null)}>
                       Government
                     </Link>
                   </li>
                   <li>
-                    <Link to="/solutions/oil-gas" className="text-gray-700 hover:text-premium-accent transition-colors">
+                    <Link to="/solutions/industry/oil-gas" className="text-gray-700 hover:text-premium-accent transition-colors" onClick={() => setOpenDropdown(null)}>
                       Oil and Gas
                     </Link>
                   </li>
                   <li>
-                    <Link to="/solutions/utilities" className="text-gray-700 hover:text-premium-accent transition-colors">
-                      Utilities
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/solutions/education" className="text-gray-700 hover:text-premium-accent transition-colors">
+                    <Link to="/solutions/industry/education" className="text-gray-700 hover:text-premium-accent transition-colors" onClick={() => setOpenDropdown(null)}>
                       Education
                     </Link>
                   </li>
-                  <li>
-                    <Link to="/solutions/retail" className="text-gray-700 hover:text-premium-accent transition-colors">
-                      Retail
-                    </Link>
-                  </li>
                 </ul>
               </div>
             )}
           </div>
 
-          {/* Resources Dropdown */}
-          <div 
-            className="relative" 
-            onMouseEnter={() => handleMouseEnter('resources')}
-            onMouseLeave={handleMouseLeave}
-          >
-            <button 
-              className={`flex items-center gap-1 font-medium transition-colors ${
-                isScrolled ? 'text-gray-700 hover:text-premium-accent' : 'text-white hover:text-premium-accent'
-              }`}
-            >
-              Resources <span className="text-xs">▼</span>
-            </button>
-            {openDropdown === 'resources' && (
-              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[320px] bg-white text-gray-800 rounded-lg shadow-xl p-6 border border-gray-200">
-                <ul className="space-y-3">
-                  <li>
-                    <Link 
-                      to="/resources/blog" 
-                      className="block text-gray-700 hover:text-premium-accent font-medium transition-colors"
-                    >
-                      Blog
-                    </Link>
-                    <p className="text-xs text-gray-500 mt-1">Latest insights and news</p>
-                  </li>
-                  <li className="pt-3 border-t border-gray-200">
-                    <Link 
-                      to="/resources/documentation" 
-                      className="block text-gray-700 hover:text-premium-accent font-medium transition-colors"
-                    >
-                      Documentation
-                    </Link>
-                    <p className="text-xs text-gray-500 mt-1">Technical guides and docs</p>
-                  </li>
-                </ul>
-              </div>
-            )}
-          </div>
-
-          {/* Company Link */}
           <Link
             to="/company"
             className={`font-medium transition-colors ${
@@ -194,7 +150,6 @@ export default function Navbar() {
             Company
           </Link>
 
-          {/* Contact CTA */}
           <Link
             to="/contact"
             className="px-6 py-2 bg-premium-accent hover:bg-cyan-600 text-white font-semibold rounded-full transition-colors"
@@ -226,130 +181,51 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile Menu - FIXED! */}
+      {/* Mobile Menu */}
       {mobileMenuOpen && (
         <div className="md:hidden bg-white border-t border-gray-200 py-4 px-6">
-          
-          {/* Products Dropdown */}
           <div className="mb-3">
             <button
               onClick={() => toggleMobileDropdown('products')}
               className="w-full flex items-center justify-between text-gray-700 hover:text-premium-accent font-medium py-2"
             >
               <span>Products</span>
-              <span className={`text-xs transition-transform ${mobileDropdown === 'products' ? 'rotate-180' : ''}`}>
-                ▼
-              </span>
+              <span className={`text-xs transition-transform ${mobileDropdown === 'products' ? 'rotate-180' : ''}`}>▼</span>
             </button>
             {mobileDropdown === 'products' && (
               <div className="pl-4 mt-2 space-y-2 border-l-2 border-premium-accent">
-                <Link 
-                  to="/products/provider" 
-                  className="block text-sm text-gray-600 hover:text-premium-accent py-1"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
+                <Link to="/products/provider" className="block text-sm text-gray-600 hover:text-premium-accent py-1" onClick={() => setMobileMenuOpen(false)}>
                   PremiumID Provider
                 </Link>
-                <Link 
-                  to="/products/smart-card" 
-                  className="block text-sm text-gray-600 hover:text-premium-accent py-1"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
+                <Link to="/products/smart-card" className="block text-sm text-gray-600 hover:text-premium-accent py-1" onClick={() => setMobileMenuOpen(false)}>
                   PremiumID Smart Card Plugin
                 </Link>
               </div>
             )}
           </div>
 
-          {/* Solutions Dropdown */}
           <div className="mb-3">
             <button
               onClick={() => toggleMobileDropdown('solutions')}
               className="w-full flex items-center justify-between text-gray-700 hover:text-premium-accent font-medium py-2"
             >
               <span>Solutions</span>
-              <span className={`text-xs transition-transform ${mobileDropdown === 'solutions' ? 'rotate-180' : ''}`}>
-                ▼
-              </span>
+              <span className={`text-xs transition-transform ${mobileDropdown === 'solutions' ? 'rotate-180' : ''}`}>▼</span>
             </button>
             {mobileDropdown === 'solutions' && (
               <div className="pl-4 mt-2 space-y-2 border-l-2 border-premium-accent">
-                <Link to="/solutions/financial-services" className="block text-sm text-gray-600 hover:text-premium-accent py-1" onClick={() => setMobileMenuOpen(false)}>
-                  Financial Services
-                </Link>
-                <Link to="/solutions/healthcare" className="block text-sm text-gray-600 hover:text-premium-accent py-1" onClick={() => setMobileMenuOpen(false)}>
-                  Healthcare
-                </Link>
-                <Link to="/solutions/manufacturing" className="block text-sm text-gray-600 hover:text-premium-accent py-1" onClick={() => setMobileMenuOpen(false)}>
-                  Manufacturing
-                </Link>
-                <Link to="/solutions/government" className="block text-sm text-gray-600 hover:text-premium-accent py-1" onClick={() => setMobileMenuOpen(false)}>
-                  Government
-                </Link>
-                <Link to="/solutions/oil-gas" className="block text-sm text-gray-600 hover:text-premium-accent py-1" onClick={() => setMobileMenuOpen(false)}>
-                  Oil and Gas
-                </Link>
-                <Link to="/solutions/utilities" className="block text-sm text-gray-600 hover:text-premium-accent py-1" onClick={() => setMobileMenuOpen(false)}>
-                  Utilities
-                </Link>
-                <Link to="/solutions/education" className="block text-sm text-gray-600 hover:text-premium-accent py-1" onClick={() => setMobileMenuOpen(false)}>
-                  Education
-                </Link>
-                <Link to="/solutions/retail" className="block text-sm text-gray-600 hover:text-premium-accent py-1" onClick={() => setMobileMenuOpen(false)}>
-                  Retail
-                </Link>
+                <Link to="/solutions/industry/financial-services" className="block text-sm text-gray-600 hover:text-premium-accent py-1" onClick={() => setMobileMenuOpen(false)}>Financial Services</Link>
+                <Link to="/solutions/industry/healthcare" className="block text-sm text-gray-600 hover:text-premium-accent py-1" onClick={() => setMobileMenuOpen(false)}>Healthcare</Link>
+                <Link to="/solutions/industry/manufacturing" className="block text-sm text-gray-600 hover:text-premium-accent py-1" onClick={() => setMobileMenuOpen(false)}>Manufacturing</Link>
+                <Link to="/solutions/industry/government" className="block text-sm text-gray-600 hover:text-premium-accent py-1" onClick={() => setMobileMenuOpen(false)}>Government</Link>
+                <Link to="/solutions/industry/oil-gas" className="block text-sm text-gray-600 hover:text-premium-accent py-1" onClick={() => setMobileMenuOpen(false)}>Oil and Gas</Link>
+                <Link to="/solutions/industry/education" className="block text-sm text-gray-600 hover:text-premium-accent py-1" onClick={() => setMobileMenuOpen(false)}>Education</Link>
               </div>
             )}
           </div>
 
-          {/* Resources Dropdown */}
-          <div className="mb-3">
-            <button
-              onClick={() => toggleMobileDropdown('resources')}
-              className="w-full flex items-center justify-between text-gray-700 hover:text-premium-accent font-medium py-2"
-            >
-              <span>Resources</span>
-              <span className={`text-xs transition-transform ${mobileDropdown === 'resources' ? 'rotate-180' : ''}`}>
-                ▼
-              </span>
-            </button>
-            {mobileDropdown === 'resources' && (
-              <div className="pl-4 mt-2 space-y-2 border-l-2 border-premium-accent">
-                <Link 
-                  to="/resources/blog" 
-                  className="block text-sm text-gray-600 hover:text-premium-accent py-1"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Blog
-                </Link>
-                <Link 
-                  to="/resources/documentation" 
-                  className="block text-sm text-gray-600 hover:text-premium-accent py-1"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Documentation
-                </Link>
-              </div>
-            )}
-          </div>
-
-          {/* Company Link */}
-          <Link 
-            to="/company" 
-            className="block text-gray-700 hover:text-premium-accent font-medium py-2"
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            Company
-          </Link>
-
-          {/* Contact Link */}
-          <Link 
-            to="/contact" 
-            className="block mt-4 text-center px-6 py-2 bg-premium-accent hover:bg-cyan-600 text-white font-semibold rounded-full transition-colors"
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            Contact Us
-          </Link>
+          <Link to="/company" className="block text-gray-700 hover:text-premium-accent font-medium py-2" onClick={() => setMobileMenuOpen(false)}>Company</Link>
+          <Link to="/contact" className="block mt-4 text-center px-6 py-2 bg-premium-accent hover:bg-cyan-600 text-white font-semibold rounded-full transition-colors" onClick={() => setMobileMenuOpen(false)}>Contact Us</Link>
         </div>
       )}
     </nav>

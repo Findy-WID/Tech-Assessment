@@ -11,11 +11,16 @@
 // props: { title, subtitle, ctaPrimary, ctaSecondary }: HeroSectionProps
 
 import { Play } from 'lucide-react';
+import DemoModal from '../../../components/ui/DemoModal';
+import { useState } from 'react';
 
 export default function HeroSection() {
-  return (
 
-       <section className="relative bg-[#010534] text-white min-h-screen flex flex-col justify-center items-center pt-20 mt-5">
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  return (
+    <>
+     <section className="relative bg-[#010534] text-white min-h-screen flex flex-col justify-center items-center pt-20 mt-5">
         <div className="text-center space-y-6 max-w-5xl px-6">
           <h1 className="text-5xl md:text-6xl font-bold leading-tight mb-0">
             The new era of adaptive identity
@@ -24,12 +29,12 @@ export default function HeroSection() {
             Identity-first security for humans, machines, and AI.
           </p>
           <div className="flex gap-4 justify-center">
-            <a href="https://www.sailpoint.com/demo" className="px-8 py-3 bg-[#f0eab8] text-[#010534] rounded-full font-medium hover:bg-[#f0eab8]/80 transition-colors">
+            <button onClick={() => setIsModalOpen(true)} className="px-8 py-3 w-full max-w-xs bg-[#f0eab8] text-[#010534] text-xl rounded-full font-medium hover:bg-[#f0eab8]/80 transition-colors">
               Book A Demo
-            </a>
-            <a href="https://www.sailpoint.com/demo/interactive" className="px-8 py-3 border border-[#f0eab8]/60 rounded-full font-medium hover:bg-white/10 transition-colors">
+            </button>
+            {/* <a href="https://www.sailpoint.com/demo/interactive" className="px-8 py-3 border border-[#f0eab8]/60 rounded-full font-medium hover:bg-white/10 transition-colors">
               Take a product tour
-            </a>
+            </a> */}
           </div>
         </div>
 
@@ -45,6 +50,11 @@ export default function HeroSection() {
           </button>
         </div>
       </section>
-    
+
+      <DemoModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
+    </>
   );
 }

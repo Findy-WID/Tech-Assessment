@@ -29,7 +29,7 @@ export default function ContactPage() {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Identity Blitz Office - Pyatnitskaya st., 73, Moscow"
+                title="PremiumID Office - ABBA Johnson Crescent, Harmony Enclave Estate, Lagos"
               />
             </div>
 
@@ -51,7 +51,7 @@ export default function ContactPage() {
                   </p>
                   <p>
                     <strong>Email:</strong>{' '}
-                    <a href="mailto:info@idblitz.com" className="text-blue-600 hover:underline">
+                    <a href="mailto:Info@premiumid.net" className="text-blue-600 hover:underline">
                       Info@premiumid.net
                     </a>
                   </p>
