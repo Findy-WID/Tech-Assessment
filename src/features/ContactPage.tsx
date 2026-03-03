@@ -13,7 +13,7 @@ export default function ContactPage() {
       city: "Abuja, Nigeria",
       location: "CBD",
       address: "Plot 94, Gwarinpa 1 Life Camp Extension, Life Camp Abuja.",
-      phone: "+234 900 765 4321",
+      phone: "+234-8060-000400",
     },
     {
       city: "Accra, Ghana",
@@ -102,7 +102,7 @@ export default function ContactPage() {
                       <p className="text-sm font-bold text-gray-400 uppercase tracking-widest">Global Support</p>
                       <div className="space-y-1">
                         <p className="text-lg font-bold text-gray-900">NG: +234-8060-000400</p>
-                        <p className="text-lg font-bold text-gray-900">GH: +233 24 000 0000</p>
+                        <p className="text-lg font-bold text-gray-900">GH: +233 504957381</p>
                       </div>
                     </div>
                   </div>
