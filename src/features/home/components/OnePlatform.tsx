@@ -14,28 +14,28 @@ export default function OnePlatform() {
       title: "Foundation of Identity",
       accent: "The Atlas Layer",
       description: "The Atlas provides the mapping for all human and non-human identities across your entire cloud ecosystem.",
-      image: "https://placehold.co/600x400/010534/white?text=Atlas+Layer"
+      image: "/AtlasLayer.jpeg"
     },
     {
       id: "Control plane",
       title: "Centralized Management",
       accent: "Control Plane",
       description: "Automate policy enforcement and least privilege access through a centralized intelligence layer.",
-      image: "https://placehold.co/600x400/010534/white?text=Control+Plane"
+      image: "/ControlPlane.jpeg"
     },
     {
       id: "Real-time plane",
       title: "Instant Assessment",
       accent: "Security Plane",
       description: "Analyze behavioral signals as they happen to block threats before they penetrate the perimeter.",
-      image: "https://placehold.co/600x400/010534/white?text=Real-time+Plane"
+      image: "/Real-timePlane.jpeg"
     },
     {
       id: "Security plane",
       title: "Uncompromising Protection",
       accent: "Real-time Plane",
       description: "Detect identity-based threats in real-time. Our security plane acts as an automated firewall for your users.",
-      image: "https://placehold.co/600x400/010534/white?text=Security+Plane"
+      image: "/SecurityPlane.jpeg"
     },
     {
       id: "Customer success",
@@ -49,14 +49,14 @@ export default function OnePlatform() {
       title: "Intelligent Interaction",
       accent: "The Agentic UX",
       description: "Frictionless security that learns. Our AI-driven experience anticipates user needs and automates prompts.",
-      image: "https://placehold.co/600x400/010534/white?text=Agentic+UX"
+      image: "/AgentUX.jpeg"
     },
     {
       id: "Ecosystem",
       title: "Limitless Connectivity",
       accent: "Unified Ecosystem",
       description: "Connect everything from legacy on-premise servers to the latest SaaS tools in a single fabric.",
-      image: "https://placehold.co/600x400/010534/white?text=Ecosystem"
+      image: "/UnifiedEcosystem.jpeg"
     }
   ];
 

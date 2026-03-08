@@ -110,9 +110,53 @@ export default function Navbar() {
                 onMouseLeave={handleMouseLeave}
               >
                 <div className="grid grid-cols-2 gap-8">
-                  {/* By Industry */}
+
+                  {/* Identity & Auth */}
                   <div>
-                    <h4 className="font-bold text-gray-900 mb-4">By Industry</h4>
+                    <h4 className="font-bold text-gray-900 mb-4">Identity & Auentication</h4>
+                    <ul className="space-y-3 text-sm">
+                      <li>
+                        <Link 
+                          to="/solutions/single-sign-on" 
+                          className="text-gray-700 hover:text-premium-accent transition-colors" 
+                          onClick={() => setOpenDropdown(null)}
+                        >
+                          Single Sign-On
+                        </Link>
+                      </li>
+                      <li>
+                        <Link 
+                          to="/solutions/multifactor" 
+                          className="text-gray-700 hover:text-premium-accent transition-colors" 
+                          onClick={() => setOpenDropdown(null)}
+                        >
+                          Multi-Factor Authentication
+                        </Link>
+                      </li>
+                      <li>
+                        <Link 
+                          to="/solutions/passwordless" 
+                          className="text-gray-700 hover:text-premium-accent transition-colors" 
+                          onClick={() => setOpenDropdown(null)}
+                        >
+                          Passwordless
+                        </Link>
+                      </li>
+                      <li>
+                        <Link 
+                          to="/solutions/identitybrokering" 
+                          className="text-gray-700 hover:text-premium-accent transition-colors" 
+                          onClick={() => setOpenDropdown(null)}
+                        >
+                          Identity Brokering
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+
+                  {/* Industry */}
+                  <div>
+                    <h4 className="font-bold text-gray-900 mb-4">Industrial Applications</h4>
                     <ul className="space-y-3 text-sm">
                       <li>
                         <Link 
@@ -166,49 +210,6 @@ export default function Navbar() {
                           onClick={() => setOpenDropdown(null)}
                         >
                           Education
-                        </Link>
-                      </li>
-                    </ul>
-                  </div>
-
-                  {/* By Use Case */}
-                  <div>
-                    <h4 className="font-bold text-gray-900 mb-4">Identity & Auenticationth</h4>
-                    <ul className="space-y-3 text-sm">
-                      <li>
-                        <Link 
-                          to="/solutions/single-sign-on" 
-                          className="text-gray-700 hover:text-premium-accent transition-colors" 
-                          onClick={() => setOpenDropdown(null)}
-                        >
-                          Single Sign-On
-                        </Link>
-                      </li>
-                      <li>
-                        <Link 
-                          to="/solutions/multifactorless" 
-                          className="text-gray-700 hover:text-premium-accent transition-colors" 
-                          onClick={() => setOpenDropdown(null)}
-                        >
-                          Multi-Factor Authentication
-                        </Link>
-                      </li>
-                      <li>
-                        <Link 
-                          to="/solutions/passwordless" 
-                          className="text-gray-700 hover:text-premium-accent transition-colors" 
-                          onClick={() => setOpenDropdown(null)}
-                        >
-                          Passwordless
-                        </Link>
-                      </li>
-                      <li>
-                        <Link 
-                          to="/solutions/identitybrokering" 
-                          className="text-gray-700 hover:text-premium-accent transition-colors" 
-                          onClick={() => setOpenDropdown(null)}
-                        >
-                          Identity Brokering
                         </Link>
                       </li>
                     </ul>
