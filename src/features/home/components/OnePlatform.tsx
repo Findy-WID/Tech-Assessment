@@ -7,7 +7,7 @@ export default function OnePlatform() {
       title: "Adaptive Identity Security",
       accent: "Real-time Power",
       description: "Unify identity, data, and security intelligence in real time with PremiumID. Continuously assess risk and behavior.",
-      image: "/layeredcube1.png" 
+      image: "/Real-timePower.jpeg" 
     },
     {
       id: "Atlas",
@@ -24,25 +24,25 @@ export default function OnePlatform() {
       image: "/ControlPlane.jpeg"
     },
     {
-      id: "Real-time plane",
+      id: "Security plane",
       title: "Instant Assessment",
       accent: "Security Plane",
       description: "Analyze behavioral signals as they happen to block threats before they penetrate the perimeter.",
-      image: "/Real-timePlane.jpeg"
+      image: "/SecurityPlane.jpeg"
     },
     {
-      id: "Security plane",
+      id: " Real-time plane",
       title: "Uncompromising Protection",
       accent: "Real-time Plane",
       description: "Detect identity-based threats in real-time. Our security plane acts as an automated firewall for your users.",
-      image: "/SecurityPlane.jpeg"
+      image: "/Real-timePlane.jpeg"
     },
     {
       id: "Customer success",
       title: "Expert Guidance",
       accent: "Tailored Growth",
       description: "Beyond technology, we provide a dedicated partnership to ensure PremiumID scales with your organization.",
-      image: "https://placehold.co/600x400/010534/white?text=Customer+Success"
+      image: "/TailoredGrowth.jpeg"
     },
     {
       id: "Agentic UX",
